@@ -1,5 +1,5 @@
 ---
-title: "Project 1 Earthquakes On Github "
+title: "Project 1 aka the coolest project ever "
 author: "Arjun Rajesh"
 date: "2022-09-17"
 output: html_document
