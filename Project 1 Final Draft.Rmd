@@ -1,0 +1,102 @@
+---
+title: "Project 1 Earthquakes"
+author: "Arjun Rajesh"
+date: "2022-09-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(tidyverse)
+```
+
+```{r,echo=FALSE}
+Earthquake <- read.csv('Project1_earthquakes.csv')
+
+```
+
+## Introduction to Earthquake Data Set
+
+The United States Geological Survey carefully monitors and reports earthquakes' impacts and their hazards. The USGS targeted their research on the causes and effects of earthquakes. This data set contains information about earthquakes including their distance, gap, magnitude, depth, and significance. These Earthquake records are collected from around the world from the United States Geological Survey. This data set also includes exact geological coordinates and a description of the earthquake's location worldwide.
+
+#### Variables
+
+The outcome variable we want to determine in this report is the significance. The significance variable is a number that determines how significant the event is. (A larger number would tell us that the event is more significant) The predictor variables that would help us determine how significant the earthquake is are the distance, depth, and magnitude. The distance variable is the rough distance that this earthquake occurred away from the reporting station. The depth variable is the depth of the event in kilometers. The magnitude variable is a measure of size of an earthquake at its source.
+
+```{r, echo=FALSE}
+knitr::include_graphics("Project_1_photo.jpeg")
+
+
+```
+
+Citation: [Library.ugs.gov](https://library.usgs.gov/photo/#/item/51dc4582e4b0f81004b7b585)
+
+#### Description of Image
+
+This destruction of an adobe house occurred in Guatemala in 1976. This is considered a large-scale destruction of an adobe house in Guatemala City.
+
+Calle 2 and Avenida 9A. 1976. Figure 69-B, U.S. Geological Survey Professional paper 1002.
+
+## Outcome Variable
+
+```{r,echo=FALSE,results='hide'}
+summary(Earthquake$impact.significance)
+hist(Earthquake$impact.significance, main='Earthquake Significance', xlab='Impact Significance', col='steelblue1', breaks = 50,xlim=c(0,700))
+
+
+
+```
+
+#### Outcome Variable Description
+
+The histogram shows that most earthquakes have an impact significance close to zero. This means that most earthquakes are not deemed significant on this scale. The descriptive statistics include; the minimum which is at 0.00, the first quartile which is at 8.00, the median which is at 22.00, the mean value is 56.34, the third quartile is at 54.00, and the max value is 2674.00 which is an exceptional max significance and a possible outlier.
+
+## Predictor Variable (Distance in km)
+
+```{r, echo=FALSE, results='hide'}
+plot(Earthquake$location.distance, Earthquake$impact.significance, main= 'Distance V. Significance', xlab='Distance from report station (km)', ylab='Impact Significance', pch=20, col='darkorchid1')
+cor(Earthquake$location.distance, Earthquake$impact.significance)
+```
+
+#### **Predictor Variable Description**
+
+It is discovered that there is a positive moderate correlation between Distance and Impact Significance of 0.54. Therefore there is a relationship between the Distance and the impact significance of earthquakes across the globe. The majority of the earthquakes remain from zero to ten Km from the reporting station. There is a single earthquake with a significance over 2,500 and should investigated as an outlier.
+
+## Predictor Variable (Depth in km)
+
+```{r, echo=FALSE,results='hide'}
+plot(Earthquake$location.depth, Earthquake$impact.significance, main='Depth of Earthquakes V. Significance', xlab='Depth (km)', ylab='Impact Significance', pch=20, col='cyan4')
+cor(Earthquake$location.depth, Earthquake$impact.significance)
+```
+
+#### **Predictor Variable Description**
+
+It is discovered that there is a positive moderate correlation between the Depth of the event and the Impact Significance of 0.40. Therefore there is moderate a relationship between the depth of the event and the impact significance. A single outlier with a significance over 2500 is making it difficult to determine the correlation from the plot.
+
+## Predictor Variable (magnitude)
+
+```{r, echo=FALSE,results='hide'}
+plot(Earthquake$impact.magnitude, Earthquake$impact.significance, main='Magnitude V. Significance', xlab='Magnitude of Earthquake', ylab='Impact Significance', pch=20, col='darksalmon')
+cor(Earthquake$impact.magnitude, Earthquake$impact.significance)
+```
+
+#### **Predictor Variable Description**
+
+It is discovered that there is a positive strong correlation between the Magnitude of the Earthquake and the Impact Significance of 0.91. Therefore there is a relationship between the magnitude and the impact significance of the event. It can also be seen from the scatter plot that the larger the size of the magnitude, the bigger the impact of significance the event is. There is a single outlier over 2500 that should be investigated further.
+
+## Conclusion
+
+Conclusion: In this report the impact of Earthquake's impact significance across the globe was investigated(outcome variable). The three predictor variables that we used are; distance from report station, the depth of the impact, and the magnitude of the earthquake. We used these three variables to help us determine if there is a relationship between them and the impact significance. The histogram of the Earthquake's significance showed that most earthquakes worldwide have an impact significance close to zero. The first predictor variable that was experimented was the distance from the reporting station in km. It was discovered that there was a relationship between the distance from the reporting station and the earthquake's impact significance. There is a moderate positive correlation of 0.54. The next predictor variable that was experimented was the depth of the event in km. It was discovered that there is a moderate positive correlation of 0.40, showing that there is a relationship between the depth of the earthquake and the impact significance. The next predictor variable that was experimented was the magnitude of the event. It was discovered that there is a positive strong correlation of 0.91 between the magnitude of the earthquake and the impact significance. There is a single outlier with a significance over 2500 that should be investigated and possibly removed from this data set.
+
+#### Areas for Future Research
+
+This data set contains information mainly about Earthquake's across the United States varying on distance, depth, location etc.. However this data set does not include much information about Earthquake's and their impact significance in different countries. Over eighty percent of large earthquakes occur around the edges of the pacific ocean. For example, there are only two-four mentions of Indonesia and their variables in the data set. However, Indonesia is a very active seismic zone, and I believe that there should be more information about earthquakes in Indonesia's location. Therefore, I believe that in future studies there should be more data on earthquakes across the world and their effects in a global perspective. That way it's more representative.
+
+#### Sources of Information
+
+References:
+
+1: [usgs.gov_earthquakes](https://www.usgs.gov/programs/earthquake-hazards/earthquakes)
+
+2: [earthquake_csv_file](https://think.cs.vt.edu/corgis/csv/earthquakes/)
